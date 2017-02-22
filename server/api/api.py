@@ -19,7 +19,7 @@ class expression(Resource):
 
 		expression = pd.read_sql("SELECT e.celllinename, e.symbol, e.expression, a.site_primary as tissue FROM expression e JOIN annotation a ON e.annotation_id=a.id WHERE symbol = '{}'".format(symbol), conn)
 		expression['sub_tissue'] = [random.choice(['normal','cancer']) for i in range(0,expression.shape[0])]
-
+		expression.expression = 2**expression.expression
 		max_expression = expression.expression.max()
 		min_expression = expression.expression.min()
 

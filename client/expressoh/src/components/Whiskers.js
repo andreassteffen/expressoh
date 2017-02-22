@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
+
 const rectStyle = {
 	fill : 'red'
-
 }
+
 const Whiskers = (props) => {
-  console.log("ME TO BED", props)
+  const bandwidth = props.xScale.bandwidth()-10;
+  const epsilon = props.xScale.bandwidth()/2;
   return(
   		<g>
-  			{props.data.data.map((item,i)=><rect style={rectStyle} key={i} x={props.xScale(item.tissue)} y={props.yScale(item.median)} width={10} height={10} />)}
+  			{props.data.data.map((item,i)=>{
+  				let xpos = props.xScale(item.tissue)+2;
+  				if (item.sub_tissue==="cancer")
+  					xpos+=epsilon;
+  				return(
+  					<g>
+  						<rect style={rectStyle} key={i} x={xpos} y={props.yScale(item.median)} width={bandwidth/2} height={10} />
+
+
+  					</g>
+  				)}
+  				)}
   		</g>
   	)
 }

@@ -5,7 +5,7 @@ import Whiskers from './Whiskers';
 import XYAxis from './XYAxis';
 
 const yScale = (props) => {
-  return scaleLinear().domain([props.data.min_expression, props.data.max_expression]).range([props.height - props.padding, props.padding]);
+  return scaleLinear().domain([0, props.data.max_expression]).range([props.height - props.padding, props.padding]);
 };
 
 const xScale = (props) => {
